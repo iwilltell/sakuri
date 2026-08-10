@@ -1,0 +1,381 @@
+.dreams-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.dreams-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.dreams-eyebrow {
+  margin: 0 0 8px;
+  color: #a72d55;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dreams-header h1 {
+  margin: 0;
+  color: #67152f;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  line-height: 1;
+}
+
+.dreams-description {
+  margin: 12px 0 0;
+  color: #71394b;
+  line-height: 1.6;
+}
+
+.dream-create-button,
+.dream-save-button {
+  border: 0;
+  border-radius: 16px;
+  padding: 13px 20px;
+  background: linear-gradient(
+    135deg,
+    #c93663,
+    #a91f4b
+  );
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 10px 24px
+    rgba(169, 31, 75, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.dream-create-button:hover,
+.dream-save-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px
+    rgba(169, 31, 75, 0.25);
+}
+
+.dream-create-button:disabled,
+.dream-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error */
+
+.dreams-error {
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: rgba(180, 35, 70, 0.1);
+  color: #9c2044;
+  font-size: 0.9rem;
+}
+
+/* Loading */
+
+.dreams-loading {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #82485e;
+}
+
+.dreams-loading span {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.dreams-loading p {
+  margin: 0;
+}
+
+/* Create form */
+
+.dream-form {
+  padding: 28px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 18px 50px
+    rgba(120, 30, 60, 0.12);
+  backdrop-filter: blur(20px);
+}
+
+.dream-form h2 {
+  margin: 0 0 20px;
+  color: #67152f;
+}
+
+.dream-form label {
+  display: block;
+  margin-top: 16px;
+  color: #67203a;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.dream-form input,
+.dream-form textarea,
+.dream-edit-input,
+.dream-edit-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  padding: 13px 15px;
+  border: 1px solid rgba(143, 45, 78, 0.18);
+  border-radius: 14px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.58);
+  color: #521329;
+  font: inherit;
+}
+
+.dream-form input:focus,
+.dream-form textarea:focus,
+.dream-edit-input:focus,
+.dream-edit-textarea:focus {
+  border-color: rgba(170, 42, 83, 0.55);
+  box-shadow:
+    0 0 0 4px
+    rgba(214, 71, 111, 0.1);
+}
+
+.dream-form textarea,
+.dream-edit-textarea {
+  resize: vertical;
+}
+
+.dream-form input::placeholder,
+.dream-form textarea::placeholder {
+  color: #a77b8b;
+}
+
+.privacy-hint {
+  margin: 16px 0 0;
+  color: #82485e;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.dream-form .dream-save-button {
+  margin-top: 20px;
+}
+
+/* Empty */
+
+.dreams-empty {
+  min-height: 360px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 18px 50px
+    rgba(120, 30, 60, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.dreams-empty-icon {
+  color: #c93663;
+  font-size: 3.5rem;
+  margin-bottom: 14px;
+}
+
+.dreams-empty h2 {
+  margin: 0 0 8px;
+  color: #67152f;
+}
+
+.dreams-empty p {
+  margin: 0 0 22px;
+  color: #82485e;
+}
+
+/* Dream grid */
+
+.dream-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.dream-card {
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.44);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 18px 45px
+    rgba(120, 30, 60, 0.12);
+  backdrop-filter: blur(20px);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dream-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 22px 50px
+    rgba(120, 30, 60, 0.17);
+}
+
+.dream-image {
+  width: 100%;
+  height: 220px;
+  display: block;
+  object-fit: cover;
+}
+
+.dream-card-content {
+  padding: 24px;
+}
+
+.dream-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dream-date {
+  color: #9a6578;
+  font-size: 0.78rem;
+}
+
+.dream-privacy {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  color: #a65b76;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.dream-privacy:hover {
+  transform: scale(1.08);
+  background: rgba(255, 220, 232, 0.7);
+}
+
+.dream-privacy.private {
+  color: #c93663;
+  background: rgba(255, 220, 232, 0.65);
+}
+
+.dream-privacy:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dream-card h2 {
+  margin: 18px 0 8px;
+  color: #67152f;
+  font-size: 1.35rem;
+}
+
+.dream-description {
+  margin: 0;
+  color: #71394b;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* Actions */
+
+.dream-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dream-actions button {
+  padding: 9px 14px;
+  border: 1px solid rgba(170, 42, 83, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  color: #8f3154;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dream-actions button:hover {
+  background: rgba(255, 220, 232, 0.6);
+}
+
+.dream-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Edit */
+
+.dream-edit-input {
+  margin-top: 18px;
+  font-weight: 700;
+}
+
+.dream-edit-textarea {
+  min-height: 100px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .dreams-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dream-create-button {
+    width: 100%;
+  }
+
+  .dream-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dream-card-content {
+    padding: 20px;
+  }
+
+  .dream-form {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .dreams-empty {
+    min-height: 300px;
+    padding: 28px 20px;
+  }
+}

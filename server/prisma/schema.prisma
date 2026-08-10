@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum DreamVisibility {
+  SHARED
+  PRIVATE
+}
+
+enum OtpPurpose {
+  CHANGE_PIN
+}
+
+model Account {
+  id      String @id @default(cuid())
+  email   String @unique
+  pinHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile  Profile?
+  sessions Session[]
+  otps     Otp[]
+  dreams   Dream[]
+  memories Memory[]
+}
+
+model Profile {
+  id        String @id @default(cuid())
+  accountId String @unique
+
+  username     String
+  profileImage String?
+  description  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+}
+
+model Session {
+  id        String @id @default(cuid())
+  accountId String
+
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+  @@index([expiresAt])
+}
+
+model Otp {
+  id        String @id @default(cuid())
+  accountId String
+
+  codeHash String
+  purpose  OtpPurpose
+
+  expiresAt  DateTime
+  verifiedAt DateTime?
+  attempts   Int       @default(0)
+
+  createdAt DateTime @default(now())
+
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+  @@index([expiresAt])
+}
+
+model Dream {
+  id String @id @default(cuid())
+
+  title       String
+  description String?
+
+  // Dreams are shared by default.
+  visibility DreamVisibility @default(SHARED)
+
+  accountId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  images  DreamImage[]
+
+  @@index([accountId])
+  @@index([visibility])
+  @@index([createdAt])
+}
+
+model DreamImage {
+  id String @id @default(cuid())
+
+  dreamId String
+
+  url       String
+  publicId  String
+  sortOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  dream Dream @relation(fields: [dreamId], references: [id], onDelete: Cascade)
+
+  @@index([dreamId])
+}
+
+model Memory {
+  id String @id @default(cuid())
+
+  title       String
+  description String?
+
+  accountId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  images  MemoryImage[]
+
+  @@index([accountId])
+  @@index([createdAt])
+}
+
+model MemoryImage {
+  id String @id @default(cuid())
+
+  memoryId String
+
+  url       String
+  publicId  String
+  sortOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  memory Memory @relation(fields: [memoryId], references: [id], onDelete: Cascade)
+
+  @@index([memoryId])
+}

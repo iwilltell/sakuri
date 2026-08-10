@@ -1,0 +1,203 @@
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-eyebrow {
+  margin: 0 0 8px;
+  color: #a72d55;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.settings-header h1 {
+  margin: 0;
+  color: #67152f;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.settings-subtitle {
+  margin: 10px 0 0;
+  color: #71394b;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.settings-card {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 18px;
+  padding: 26px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 15px 40px
+    rgba(120, 30, 60, 0.08);
+  backdrop-filter: blur(24px);
+}
+
+.settings-card-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(255, 220, 232, 0.7);
+  font-size: 1.45rem;
+}
+
+.settings-card-content {
+  min-width: 0;
+}
+
+.settings-card-content h2 {
+  margin: 0;
+  color: #67152f;
+  font-size: 1.25rem;
+}
+
+.settings-card-content > p {
+  margin: 7px 0 16px;
+  color: #71394b;
+  line-height: 1.55;
+}
+
+.settings-primary-button,
+.settings-secondary-button,
+.settings-logout-button {
+  border: 0;
+  border-radius: 13px;
+  padding: 11px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.settings-primary-button {
+  background: linear-gradient(
+    135deg,
+    #c93663,
+    #a91f4b
+  );
+  color: white;
+}
+
+.settings-secondary-button {
+  background: rgba(255, 220, 232, 0.7);
+  color: #9c2044;
+}
+
+.settings-logout-button {
+  background: rgba(180, 35, 70, 0.1);
+  color: #a32148;
+}
+
+.settings-primary-button:disabled,
+.settings-secondary-button:disabled,
+.settings-logout-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.settings-email {
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #67203a;
+  word-break: break-word;
+}
+
+.settings-error,
+.settings-message {
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.settings-error {
+  background: rgba(180, 35, 70, 0.1);
+  color: #9c2044;
+}
+
+.settings-message {
+  background: rgba(45, 150, 95, 0.1);
+  color: #28744e;
+}
+
+.pin-change-form {
+  max-width: 430px;
+  margin-top: 20px;
+}
+
+.pin-step-text {
+  margin-bottom: 14px !important;
+}
+
+.pin-change-form label {
+  display: block;
+  margin-top: 14px;
+  color: #67203a;
+  font-weight: 700;
+}
+
+.pin-change-form input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 7px;
+  padding: 13px 15px;
+  border: 1px solid
+    rgba(143, 45, 78, 0.18);
+  border-radius: 14px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.6);
+  color: #521329;
+  font: inherit;
+}
+
+.pin-change-form input:focus {
+  border-color: #c93663;
+}
+
+.settings-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+@media (max-width: 600px) {
+  .settings-card {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .settings-card-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .settings-form-actions {
+    flex-direction: column;
+  }
+
+  .settings-form-actions button {
+    width: 100%;
+  }
+}
