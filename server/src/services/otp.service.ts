@@ -51,6 +51,7 @@ export async function requestPinReset(
     return;
   }
 
+  // Remove older unused OTPs.
   await prisma.otp.deleteMany({
     where: {
       accountId: account.id,
@@ -69,19 +70,41 @@ export async function requestPinReset(
         1000,
   );
 
-  await prisma.otp.create({
-    data: {
-      accountId: account.id,
-      codeHash,
-      purpose: "CHANGE_PIN",
-      expiresAt,
-    },
-  });
+  const createdOtp =
+    await prisma.otp.create({
+      data: {
+        accountId: account.id,
+        codeHash,
+        purpose: "CHANGE_PIN",
+        expiresAt,
+      },
+    });
 
-  await sendPinResetOtp(
-    normalizedEmail,
-    otp,
-  );
+  try {
+    await sendPinResetOtp(
+      normalizedEmail,
+      otp,
+    );
+  } catch (error) {
+    /*
+     * Email delivery failed.
+     *
+     * Remove the OTP that we just created so
+     * an undelivered code cannot remain active.
+     */
+    await prisma.otp.delete({
+      where: {
+        id: createdOtp.id,
+      },
+    }).catch((cleanupError) => {
+      console.error(
+        "Failed to clean up OTP after email failure:",
+        cleanupError,
+      );
+    });
+
+    throw error;
+  }
 }
 
 // --------------------------------------------------
@@ -113,6 +136,7 @@ export async function requestChangePinOtp(
     );
   }
 
+  // Remove older unused OTPs.
   await prisma.otp.deleteMany({
     where: {
       accountId: account.id,
@@ -131,19 +155,39 @@ export async function requestChangePinOtp(
         1000,
   );
 
-  await prisma.otp.create({
-    data: {
-      accountId: account.id,
-      codeHash,
-      purpose: "CHANGE_PIN",
-      expiresAt,
-    },
-  });
+  const createdOtp =
+    await prisma.otp.create({
+      data: {
+        accountId: account.id,
+        codeHash,
+        purpose: "CHANGE_PIN",
+        expiresAt,
+      },
+    });
 
-  await sendPinResetOtp(
-    normalizedEmail,
-    otp,
-  );
+  try {
+    await sendPinResetOtp(
+      normalizedEmail,
+      otp,
+    );
+  } catch (error) {
+    /*
+     * Email delivery failed.
+     * Remove the newly created OTP.
+     */
+    await prisma.otp.delete({
+      where: {
+        id: createdOtp.id,
+      },
+    }).catch((cleanupError) => {
+      console.error(
+        "Failed to clean up OTP after email failure:",
+        cleanupError,
+      );
+    });
+
+    throw error;
+  }
 }
 
 // --------------------------------------------------
@@ -183,6 +227,7 @@ export async function verifyPinResetOtp(
         purpose: "CHANGE_PIN",
         verifiedAt: null,
       },
+
       orderBy: {
         createdAt: "desc",
       },
@@ -290,6 +335,7 @@ export async function resetPin(
       where: {
         id: otpId,
       },
+
       include: {
         account: true,
       },

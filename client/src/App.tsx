@@ -13,6 +13,7 @@ import Profile, {
   type ProfileData,
 } from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
+import GuestDemo from "./pages/GuestDemo/GuestDemo";
 
 const API_URL =
   import.meta.env.VITE_API_URL ??
@@ -52,14 +53,16 @@ type Screen =
   | "profile"
   | "login"
   | "pin-reset"
-  | "app";
+  | "app"
+  | "guest";
 
 // --------------------------------------------------
 // TIME
 // --------------------------------------------------
 
 function getTimePeriod(): TimePeriod {
-  const hour = new Date().getHours();
+  const hour =
+    new Date().getHours();
 
   if (hour >= 5 && hour < 12) {
     return "morning";
@@ -178,7 +181,7 @@ function App() {
     useState(false);
 
   // --------------------------------------------------
-  // TIME
+  // TIME UPDATE
   // --------------------------------------------------
 
   useEffect(() => {
@@ -247,7 +250,7 @@ function App() {
       const status: SetupStatus =
         await response.json();
 
-      if (status.accountCount < 2) {
+      if (status.accountCount === 0) {
         setScreen("setup");
       } else {
         await loadProfiles();
@@ -264,7 +267,7 @@ function App() {
   }
 
   // --------------------------------------------------
-  // PROFILES
+  // LOAD PROFILES
   // --------------------------------------------------
 
   async function loadProfiles() {
@@ -676,6 +679,23 @@ function App() {
   }
 
   // --------------------------------------------------
+  // GUEST MODE
+  // --------------------------------------------------
+
+  function enterGuestMode() {
+    setError("");
+    setPin("");
+    setSelectedProfile(null);
+    setScreen("guest");
+  }
+
+  function exitGuestMode() {
+    setError("");
+    setScreen("loading");
+    void checkApplicationState();
+  }
+
+  // --------------------------------------------------
   // BACKGROUND
   // --------------------------------------------------
 
@@ -751,8 +771,9 @@ function App() {
             </h1>
 
             <p className="setup-text">
-              Let's create your private
-              account first.
+              {profiles.length > 0
+                ? "Let's create another private account."
+                : "Let's create your private account first."}
             </p>
 
             <label>
@@ -810,6 +831,22 @@ function App() {
                 ? "Creating..."
                 : "Continue 🌸"}
             </button>
+
+            {profiles.length > 0 && (
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => {
+                  setError("");
+                  setEmail("");
+                  setPin("");
+                  setScreen("login");
+                }}
+                disabled={loading}
+              >
+                Back to profiles
+              </button>
+            )}
           </div>
         </section>
       </main>
@@ -1059,6 +1096,31 @@ function App() {
             )}
           </div>
 
+          <button
+            type="button"
+            className="secondary-button"
+            onClick={enterGuestMode}
+            disabled={loading}
+          >
+            ✿ Continue as Guest
+          </button>
+
+          {profiles.length < 2 && (
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => {
+                setError("");
+                setEmail("");
+                setPin("");
+                setScreen("setup");
+              }}
+              disabled={loading}
+            >
+              + Create another account
+            </button>
+          )}
+
           {profiles.length === 0 && (
             <div className="glass empty-state">
               <span>♡</span>
@@ -1167,6 +1229,14 @@ function App() {
         </section>
       </main>
     );
+  }
+
+  // --------------------------------------------------
+  // GUEST / DEMO MODE
+  // --------------------------------------------------
+
+  if (screen === "guest") {
+    return <GuestDemo onExit={exitGuestMode} />;
   }
 
   // --------------------------------------------------
@@ -1322,14 +1392,10 @@ function App() {
 
           {/* SETTINGS */}
 
-          {page === "settings" && (
+          {page === "settings" && account && (
             <Settings
-              email={
-                account?.email ?? ""
-              }
-              onLogout={() =>
-                void logout()
-              }
+              email={account.email}
+              onLogout={logout}
             />
           )}
 
@@ -1338,7 +1404,6 @@ function App() {
         {/* DESKTOP NAVIGATION */}
 
         <nav className="desktop-navigation glass">
-
           <button
             type="button"
             className={
@@ -1413,13 +1478,11 @@ function App() {
             <span>⚙</span>
             Settings
           </button>
-
         </nav>
 
         {/* MOBILE NAVIGATION */}
 
         <nav className="mobile-navigation glass">
-
           <button
             type="button"
             className={
@@ -1494,7 +1557,6 @@ function App() {
             <span>⚙</span>
             Settings
           </button>
-
         </nav>
 
       </div>

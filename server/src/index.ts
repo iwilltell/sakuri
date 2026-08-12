@@ -5,6 +5,7 @@ import cors from "cors";
 import express from "express";
 
 import { prisma } from "./lib/prisma.js";
+import { deleteAccount } from "./services/account.service.js";
 
 import {
   COOKIE_NAME,
@@ -573,6 +574,57 @@ app.use(
 app.use(
   "/api/memories",
   memoryRoutes,
+);
+
+// --------------------------------------------------
+// DELETE ACCOUNT
+// --------------------------------------------------
+
+app.delete(
+  "/api/auth/account",
+  requireAuth,
+  async (
+    req: AuthenticatedRequest,
+    res,
+    next,
+  ) => {
+    try {
+      if (!req.account) {
+        res.status(401).json({
+          message: "Authentication required.",
+        });
+
+        return;
+      }
+
+      await deleteAccount(
+        req.account.id,
+      );
+
+      res.clearCookie(
+        COOKIE_NAME,
+        {
+          httpOnly: true,
+          secure:
+            process.env.NODE_ENV ===
+            "production",
+          sameSite:
+            process.env.NODE_ENV ===
+            "production"
+              ? "none"
+              : "lax",
+          path: "/",
+        },
+      );
+
+      res.json({
+        message:
+          "Your Sakuri account has been permanently deleted.",
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 );
 
 // --------------------------------------------------

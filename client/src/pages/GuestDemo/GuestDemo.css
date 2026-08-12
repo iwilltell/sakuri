@@ -1,0 +1,497 @@
+/* ---------------------------------------------------------
+   Sakuri Guest Mode
+   Scoped to .guest-demo so the private app remains untouched.
+--------------------------------------------------------- */
+
+.guest-demo {
+  min-height: 100vh;
+  color: #fff4f8;
+}
+
+.guest-demo .app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 120px;
+}
+
+.guest-demo .app-topbar {
+  min-height: 68px;
+  padding: 12px 18px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.guest-demo .app-content {
+  width: 100%;
+  margin: 24px auto 0;
+}
+
+.guest-demo .home-page {
+  width: 100%;
+  display: grid;
+  gap: 22px;
+}
+
+.guest-demo .welcome-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(24px, 4vw, 46px);
+  border-radius: 30px;
+}
+
+.guest-demo .welcome-card h1 {
+  margin: 8px 0 12px;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.guest-demo .welcome-card p:last-child {
+  max-width: 720px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.guest-demo .home-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.guest-demo .feature-card {
+  appearance: none;
+  width: 100%;
+  min-height: 190px;
+  padding: 26px;
+  border: 1px solid rgba(255, 205, 224, 0.22);
+  border-radius: 26px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.guest-demo .feature-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 180, 209, 0.55);
+}
+
+.guest-demo .feature-card strong {
+  font-size: 1.45rem;
+}
+
+.guest-demo .feature-card > span:last-child {
+  opacity: 0.72;
+  line-height: 1.55;
+}
+
+.guest-demo .feature-icon {
+  font-size: 2rem;
+}
+
+.guest-demo .guest-form-card,
+.guest-demo .guest-item-card,
+.guest-demo .guest-settings-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: 26px;
+}
+
+.guest-demo .guest-form-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.guest-demo .guest-form-heading h2 {
+  margin: 4px 0 0;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.guest-demo .guest-form-sparkle {
+  font-size: 1.7rem;
+  flex: 0 0 auto;
+}
+
+.guest-demo .guest-form-stack {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+}
+
+.guest-demo .guest-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.guest-demo .guest-field,
+.guest-demo .guest-check-field,
+.guest-demo .guest-file-field {
+  min-width: 0;
+}
+
+.guest-demo .guest-field {
+  display: grid;
+  gap: 8px;
+}
+
+.guest-demo .guest-field > span,
+.guest-demo .guest-file-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.82;
+}
+
+.guest-demo .guest-field input:not([type="checkbox"]),
+.guest-demo .guest-field textarea,
+.guest-demo .guest-field select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 211, 228, 0.22);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff6fa;
+  padding: 13px 15px;
+  font: inherit;
+  outline: none;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.guest-demo .guest-field textarea {
+  resize: vertical;
+  min-height: 125px;
+  line-height: 1.55;
+}
+
+.guest-demo .guest-field select option {
+  background: #2a1c22;
+  color: #fff6fa;
+}
+
+.guest-demo .guest-field input::placeholder,
+.guest-demo .guest-field textarea::placeholder {
+  color: rgba(255, 235, 244, 0.48);
+}
+
+.guest-demo .guest-field input:focus,
+.guest-demo .guest-field textarea:focus,
+.guest-demo .guest-field select:focus {
+  border-color: rgba(255, 163, 198, 0.75);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(255, 127, 172, 0.1);
+}
+
+.guest-demo .guest-check-field {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 211, 228, 0.18);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+}
+
+.guest-demo .guest-check-field input {
+  width: 18px;
+  height: 18px;
+  accent-color: #ef719e;
+}
+
+.guest-demo .guest-file-field {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px dashed rgba(255, 195, 219, 0.3);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.guest-demo .guest-file-field input[type="file"] {
+  width: 100%;
+  max-width: 100%;
+  color: rgba(255, 238, 246, 0.8);
+  font: inherit;
+}
+
+.guest-demo .guest-file-field small {
+  opacity: 0.58;
+}
+
+.guest-demo .guest-image-preview {
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 202, 223, 0.18);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.guest-demo .guest-image-preview img {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.guest-demo .guest-form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+.guest-demo .guest-form-actions button,
+.guest-demo .guest-settings-card button {
+  min-height: 46px;
+}
+
+.guest-demo .guest-item-list {
+  display: grid;
+  gap: 16px;
+}
+
+.guest-demo .guest-item-card {
+  overflow: hidden;
+}
+
+.guest-demo .guest-item-card h2 {
+  margin: 4px 0 10px;
+}
+
+.guest-demo .guest-item-card p {
+  line-height: 1.65;
+}
+
+.guest-demo .guest-item-card small {
+  display: block;
+  opacity: 0.62;
+  line-height: 1.5;
+}
+
+.guest-demo .guest-item-image {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 16px;
+}
+
+.guest-demo .empty-state {
+  padding: 42px 24px;
+  border-radius: 24px;
+  text-align: center;
+}
+
+.guest-demo .empty-state > span {
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.guest-demo .empty-state h2 {
+  margin: 0 0 8px;
+}
+
+.guest-demo .empty-state p {
+  margin: 0;
+  opacity: 0.68;
+}
+
+.guest-demo .guest-profile-layout {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.guest-demo .guest-profile-upload {
+  width: 180px;
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px dashed rgba(255, 190, 217, 0.42);
+  background: rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+}
+
+.guest-demo .guest-profile-upload > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.guest-demo .guest-profile-upload > span {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  font-size: 3rem;
+  color: rgba(255, 200, 222, 0.9);
+}
+
+.guest-demo .guest-profile-upload > span small {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.guest-demo .guest-profile-upload input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.guest-demo .guest-settings-card {
+  line-height: 1.7;
+}
+
+.guest-demo .guest-settings-card p {
+  max-width: 720px;
+}
+
+.guest-demo .desktop-navigation,
+.guest-demo .mobile-navigation {
+  z-index: 10;
+}
+
+.guest-demo .desktop-navigation {
+  margin: 24px auto 0;
+}
+
+.guest-demo .mobile-navigation {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .guest-demo .app-shell {
+    width: min(100% - 18px, 680px);
+    padding-top: 10px;
+    padding-bottom: 96px;
+  }
+
+  .guest-demo .app-topbar {
+    min-height: 58px;
+    padding: 9px 12px;
+    border-radius: 18px;
+  }
+
+  .guest-demo .home-cards,
+  .guest-demo .guest-field-grid,
+  .guest-demo .guest-profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guest-demo .welcome-card {
+    padding: 24px 20px;
+    border-radius: 24px;
+  }
+
+  .guest-demo .welcome-card h1 {
+    font-size: clamp(2.1rem, 11vw, 3.5rem);
+  }
+
+  .guest-demo .guest-form-card,
+  .guest-demo .guest-item-card,
+  .guest-demo .guest-settings-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .guest-demo .guest-profile-upload {
+    width: 150px;
+  }
+
+  .guest-demo .guest-check-field {
+    min-height: 52px;
+  }
+
+  .guest-demo .desktop-navigation {
+    display: none;
+  }
+
+  .guest-demo .mobile-navigation {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    position: fixed;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    padding: 7px;
+    border-radius: 22px;
+    gap: 3px;
+  }
+
+  .guest-demo .mobile-navigation button {
+    min-width: 0;
+    min-height: 54px;
+    padding: 5px 2px;
+    border: 0;
+    border-radius: 16px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.67rem;
+    cursor: pointer;
+  }
+
+  .guest-demo .mobile-navigation button span {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+  }
+
+  .guest-demo .mobile-navigation button.active {
+    background: rgba(255, 157, 194, 0.16);
+  }
+}
+
+@media (max-width: 430px) {
+  .guest-demo .app-shell {
+    width: calc(100% - 12px);
+  }
+
+  .guest-demo .app-content {
+    margin-top: 12px;
+  }
+
+  .guest-demo .guest-form-heading {
+    margin-bottom: 18px;
+  }
+
+  .guest-demo .guest-form-stack {
+    gap: 14px;
+  }
+
+  .guest-demo .guest-field-grid {
+    gap: 14px;
+  }
+
+  .guest-demo .guest-form-actions {
+    flex-direction: column;
+  }
+
+  .guest-demo .guest-form-actions button,
+  .guest-demo .guest-settings-card button {
+    width: 100%;
+  }
+}
