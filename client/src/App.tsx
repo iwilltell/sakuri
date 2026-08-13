@@ -16,8 +16,7 @@ import Settings from "./pages/Settings/Settings";
 import GuestDemo from "./pages/GuestDemo/GuestDemo";
 
 const API_URL =
-  import.meta.env.VITE_API_URL ??
-  "http://localhost:4000";
+  import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 type SetupStatus = {
   accountCount: number;
