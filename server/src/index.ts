@@ -50,9 +50,34 @@ const CLIENT_URL =
 // Middleware
 // --------------------------------------------------
 
+const ALLOWED_ORIGINS = [
+  CLIENT_URL,
+  "http://localhost:5173",
+  "capacitor://localhost",
+].filter(
+  (origin, index, origins) =>
+    origins.indexOf(origin) === index,
+);
+
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (ALLOWED_ORIGINS.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(
+        new Error(
+          `CORS blocked origin: ${origin}`,
+        ),
+      );
+    },
     credentials: true,
   }),
 );
