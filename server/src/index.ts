@@ -46,22 +46,40 @@ const CLIENT_URL =
   process.env.CLIENT_URL ??
   "http://localhost:5173";
 
-// --------------------------------------------------
-// Middleware
-// --------------------------------------------------
-
+/**
+ * Allowed browser/WebView origins.
+ *
+ * Web:
+ *   https://sakuri.onrender.com
+ *
+ * Local development:
+ *   http://localhost:5173
+ *
+ * Capacitor Android:
+ *   http://localhost
+ *
+ * capacitor://localhost is also included for
+ * platforms/configurations that use that origin.
+ */
 const ALLOWED_ORIGINS = [
   CLIENT_URL,
   "http://localhost:5173",
+  "http://localhost",
   "capacitor://localhost",
 ].filter(
   (origin, index, origins) =>
     origins.indexOf(origin) === index,
 );
 
+// --------------------------------------------------
+// Middleware
+// --------------------------------------------------
+
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Direct requests such as curl do not include
+      // an Origin header. They are safe to allow here.
       if (!origin) {
         callback(null, true);
         return;
