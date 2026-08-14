@@ -1307,3 +1307,356 @@ button {
     flex-shrink: 0;
   }
 }
+/* =========================================================
+   SAKURI — ANDROID FINAL POLISH
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* -------------------------------------------------------
+     PAGE SPACE
+     Prevent fixed bottom navigation from covering content.
+     ------------------------------------------------------- */
+
+  .app-shell {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    /* IMPORTANT:
+       More room below all pages for the fixed navigation. */
+    padding-bottom: 150px;
+  }
+
+  .app-content {
+    padding-bottom: 24px;
+  }
+
+  .section-page,
+  .home-page,
+  .dreams-page,
+  .memories-page,
+  .profile-page,
+  .settings-page {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     TOP BAR
+     ------------------------------------------------------- */
+
+  .app-topbar {
+    width: 100%;
+    min-height: 62px;
+    height: 62px;
+    padding: 0 10px 0 12px;
+    border-radius: 20px;
+  }
+
+  .brand {
+    gap: 9px;
+    font-size: 1.05rem;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .top-profile-button {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+
+  /* -------------------------------------------------------
+     PAGE HEADINGS
+     ------------------------------------------------------- */
+
+  .section-heading {
+    gap: 14px;
+  }
+
+  .section-heading h1 {
+    font-size: clamp(2.25rem, 11vw, 3rem);
+  }
+
+  .eyebrow {
+    font-size: 0.76rem;
+    letter-spacing: 0.095em;
+  }
+
+
+  /* -------------------------------------------------------
+     HOME
+     ------------------------------------------------------- */
+
+  .welcome-card {
+    padding: 28px 24px;
+    border-radius: 28px;
+  }
+
+  .welcome-card h1 {
+    font-size: clamp(2.1rem, 9vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .welcome-card > p:last-child {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .feature-card {
+    min-height: 170px;
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+
+  /* -------------------------------------------------------
+     GENERAL BUTTONS
+     ------------------------------------------------------- */
+
+  .primary-button,
+  .small-button {
+    min-height: 54px;
+    border-radius: 17px;
+  }
+
+
+  /* -------------------------------------------------------
+     PROFILE — READABILITY + IMAGE SIZE
+     ------------------------------------------------------- */
+
+  .profile-page {
+    padding: 24px 18px;
+    border-radius: 28px;
+  }
+
+  /* Current profile implementation */
+  .profile-description {
+    color: #71394b !important;
+    font-size: 1rem;
+    line-height: 1.65;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-width: 100%;
+  }
+
+  /* Older/profile-card implementation compatibility */
+  .profile-heading > p {
+    color: #71394b !important;
+    opacity: 1 !important;
+    line-height: 1.6;
+  }
+
+  .profile-information .profile-description {
+    color: #71394b !important;
+  }
+
+  /* Profile image */
+  .profile-page-image {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    overflow: hidden;
+    border-radius: 22px;
+    margin: 0 auto 20px;
+  }
+
+  .profile-page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .profile-image-wrapper {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .profile-page h1 {
+    font-size: clamp(2.3rem, 10vw, 3.2rem);
+    line-height: 1.05;
+    margin: 8px 0 12px;
+  }
+
+  .profile-page > .primary-button {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     SETTINGS
+     ------------------------------------------------------- */
+
+  .settings-page {
+    gap: 18px;
+    padding-bottom: 20px;
+  }
+
+  .settings-header {
+    margin-bottom: 4px;
+  }
+
+  .settings-header h1 {
+    font-size: clamp(2.35rem, 10vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .settings-subtitle {
+    line-height: 1.5;
+  }
+
+  .settings-list {
+    gap: 16px;
+  }
+
+  .settings-card {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 25px;
+    gap: 14px;
+  }
+
+  .settings-card-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.55rem;
+  }
+
+  .settings-card-content {
+    min-width: 0;
+  }
+
+  .settings-card-content h2 {
+    margin: 4px 0 8px;
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .settings-card-content p {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .settings-primary-button,
+  .settings-secondary-button,
+  .settings-logout-button {
+    min-height: 50px;
+    margin-top: 16px;
+    border-radius: 15px;
+  }
+
+  .settings-email {
+    margin-top: 14px;
+    padding: 11px 13px;
+    border-radius: 13px;
+    overflow-wrap: anywhere;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE NAVIGATION
+     ------------------------------------------------------- */
+
+  .mobile-navigation {
+    left: 10px;
+    right: 10px;
+
+    /* Respect Android gesture area */
+    bottom: max(8px, env(safe-area-inset-bottom));
+
+    padding: 5px;
+    border-radius: 22px;
+
+    /* Keep navigation above every card */
+    z-index: 100;
+  }
+
+  .mobile-navigation button {
+    min-height: 58px;
+    padding: 5px 2px;
+    border-radius: 16px;
+    font-size: 0.68rem;
+  }
+
+  .mobile-navigation button span {
+    font-size: 1.08rem;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   VERY SMALL ANDROID PHONES
+   --------------------------------------------------------- */
+
+@media (max-width: 390px) {
+
+  .app-shell {
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 148px;
+  }
+
+  .app-topbar {
+    height: 60px;
+    min-height: 60px;
+  }
+
+  .welcome-card {
+    padding: 24px 20px;
+  }
+
+  .feature-card {
+    min-height: 155px;
+  }
+
+  .settings-card {
+    padding: 18px;
+  }
+
+  .settings-card-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+  }
+
+  .mobile-navigation {
+    left: 8px;
+    right: 8px;
+  }
+
+  .mobile-navigation button {
+    min-height: 56px;
+    font-size: 0.64rem;
+  }
+
+  .mobile-navigation button span {
+    font-size: 1rem;
+  }
+}

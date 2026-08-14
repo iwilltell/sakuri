@@ -1,9 +1,17 @@
+/* =========================================================
+   DREAMS PAGE
+   ========================================================= */
+
 .dreams-page {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .dreams-header {
   display: flex;
@@ -33,6 +41,10 @@
   color: #71394b;
   line-height: 1.6;
 }
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .dream-create-button,
 .dream-save-button {
@@ -72,7 +84,9 @@
   transform: none;
 }
 
-/* Error */
+/* =========================================================
+   ERROR
+   ========================================================= */
 
 .dreams-error {
   padding: 13px 16px;
@@ -82,7 +96,9 @@
   font-size: 0.9rem;
 }
 
-/* Loading */
+/* =========================================================
+   LOADING
+   ========================================================= */
 
 .dreams-loading {
   min-height: 400px;
@@ -102,7 +118,9 @@
   margin: 0;
 }
 
-/* Create form */
+/* =========================================================
+   CREATE FORM
+   ========================================================= */
 
 .dream-form {
   padding: 28px;
@@ -112,7 +130,8 @@
   box-shadow:
     0 18px 50px
     rgba(120, 30, 60, 0.12);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+backdrop-filter: blur(20px);
 }
 
 .dream-form h2 {
@@ -175,7 +194,53 @@
   margin-top: 20px;
 }
 
-/* Empty */
+/* =========================================================
+   SELECTED IMAGES
+   ========================================================= */
+
+.dream-selected-images {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(120px, 1fr)
+  );
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.dream-selected-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.dream-selected-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.dream-selected-image button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(90, 20, 45, 0.75);
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
 
 .dreams-empty {
   min-height: 360px;
@@ -191,7 +256,8 @@
   box-shadow:
     0 18px 50px
     rgba(120, 30, 60, 0.1);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+backdrop-filter: blur(20px);
 }
 
 .dreams-empty-icon {
@@ -210,7 +276,9 @@
   color: #82485e;
 }
 
-/* Dream grid */
+/* =========================================================
+   DREAM GRID
+   ========================================================= */
 
 .dream-grid {
   display: grid;
@@ -218,6 +286,10 @@
     repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
+
+/* =========================================================
+   DREAM CARD
+   ========================================================= */
 
 .dream-card {
   overflow: hidden;
@@ -227,7 +299,8 @@
   box-shadow:
     0 18px 45px
     rgba(120, 30, 60, 0.12);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+backdrop-filter: blur(20px);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -240,12 +313,20 @@
     rgba(120, 30, 60, 0.17);
 }
 
+/* =========================================================
+   DREAM IMAGE
+   ========================================================= */
+
 .dream-image {
   width: 100%;
   height: 220px;
   display: block;
   object-fit: cover;
 }
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
 
 .dream-card-content {
   padding: 24px;
@@ -309,7 +390,9 @@
   white-space: pre-wrap;
 }
 
-/* Actions */
+/* =========================================================
+   ACTIONS
+   ========================================================= */
 
 .dream-actions {
   display: flex;
@@ -327,18 +410,25 @@
   font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .dream-actions button:hover {
   background: rgba(255, 220, 232, 0.6);
+  transform: translateY(-1px);
 }
 
 .dream-actions button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* Edit */
+/* =========================================================
+   EDIT
+   ========================================================= */
 
 .dream-edit-input {
   margin-top: 18px;
@@ -349,24 +439,86 @@
   min-height: 100px;
 }
 
-/* Mobile */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 700px) {
+
+  .dreams-page {
+    gap: 18px;
+  }
+
   .dreams-header {
     align-items: stretch;
     flex-direction: column;
+    gap: 14px;
+  }
+
+  .dreams-header h1 {
+    font-size: clamp(
+      2.4rem,
+      11vw,
+      3.2rem
+    );
+  }
+
+  .dreams-description {
+    font-size: 1rem;
+    line-height: 1.55;
   }
 
   .dream-create-button {
     width: 100%;
+    min-height: 54px;
   }
 
   .dream-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .dream-card {
+    width: 100%;
+    border-radius: 26px;
+  }
+
+  /*
+   * On Android the image should not dominate
+   * the entire screen.
+   */
+  .dream-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    max-height: 280px;
+    display: block;
+    object-fit: cover;
   }
 
   .dream-card-content {
     padding: 20px;
+  }
+
+  .dream-card h2 {
+    font-size: 1.45rem;
+    line-height: 1.2;
+    margin: 12px 0 8px;
+  }
+
+  .dream-description {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .dream-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .dream-actions button {
+    min-height: 46px;
   }
 
   .dream-form {
@@ -377,5 +529,38 @@
   .dreams-empty {
     min-height: 300px;
     padding: 28px 20px;
+    border-radius: 26px;
+  }
+
+  .dream-selected-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   SMALL ANDROID PHONES
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .dream-card-content {
+    padding: 18px;
+  }
+
+  .dream-form {
+    padding: 18px;
+  }
+
+  .dream-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .dream-actions button {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+
+  .dream-selected-images {
+    gap: 8px;
   }
 }

@@ -497,3 +497,87 @@
     width: 100%;
   }
 }
+/* =========================================================
+   MEMORIES — ANDROID POLISH
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .memories-page {
+    gap: 18px;
+  }
+
+  .memories-header {
+    gap: 14px;
+  }
+
+  .memory-create-button {
+    width: 100%;
+    min-height: 54px;
+  }
+
+  .memory-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .memory-card {
+    width: 100%;
+    border-radius: 26px;
+    overflow: hidden;
+  }
+
+  /* Keep multiple images in a neat 2-column gallery */
+  .memory-images {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* BUT a single image gets the entire card width */
+  .memory-image-wrapper:only-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
+
+  .memory-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .memory-card-content {
+    padding: 20px;
+  }
+
+  .memory-card h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin: 9px 0;
+  }
+
+  .memory-description {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .memory-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .memory-actions button {
+    min-height: 46px;
+  }
+
+  .memory-form {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .memory-form input[type="text"],
+  .memory-form textarea {
+    font-size: 1rem;
+  }
+
+}
