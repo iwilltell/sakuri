@@ -1,142 +1,1309 @@
 /* =========================================================
-   SAKURI ANDROID / MOBILE FIXES
-   Safe additions — does not replace existing page styles
+   SAKURI GLOBAL UI
+   Desktop + Android
    ========================================================= */
 
-/* Give the page enough room above the fixed mobile navigation */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+body {
+  background: #f8eaf0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   APP BACKGROUND
+   ========================================================= */
+
+.sakuri-app {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  overflow-x: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffdce9,
+      #fff0f5 45%,
+      #ffe0e8
+    );
+}
+
+.background-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+
+  background-image: var(--desktop-background);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.background-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 220, 233, 0.68),
+      rgba(255, 245, 248, 0.7),
+      rgba(255, 210, 222, 0.66)
+    );
+
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.46);
+
+  border: 1px solid rgba(255, 255, 255, 0.76);
+
+  box-shadow:
+    0 20px 55px rgba(130, 40, 70, 0.14);
+
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+}
+
+/* =========================================================
+   SETUP / FIRST ACCOUNT
+   ========================================================= */
+
+.center-screen {
+  position: relative;
+  z-index: 2;
+
+  width: min(calc(100% - 32px), 480px);
+
+  display: flex;
+  justify-content: center;
+}
+
+.setup-card {
+  width: 100%;
+
+  padding: 38px;
+
+  border-radius: 30px;
+
+  text-align: center;
+}
+
+.setup-logo {
+  width: 78px;
+  height: 78px;
+
+  object-fit: contain;
+
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+
+  color: #b52d59;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.setup-card h1 {
+  margin: 0;
+
+  color: #64152f;
+
+  font-size: clamp(2rem, 6vw, 3rem);
+
+  line-height: 1.05;
+}
+
+.setup-text {
+  margin: 16px 0 28px;
+
+  color: #71394b;
+
+  line-height: 1.6;
+}
+
+.setup-card label {
+  display: block;
+
+  margin-top: 18px;
+
+  color: #67203a;
+
+  text-align: left;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.setup-card input,
+.setup-card textarea {
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding: 14px 16px;
+
+  border: 1px solid rgba(143, 45, 78, 0.18);
+
+  border-radius: 16px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  color: #521329;
+}
+
+.setup-card input:focus,
+.setup-card textarea:focus {
+  border-color: rgba(170, 42, 83, 0.55);
+
+  box-shadow:
+    0 0 0 4px rgba(214, 71, 111, 0.1);
+}
+
+.setup-card textarea {
+  resize: vertical;
+
+  min-height: 100px;
+}
+
+.setup-card input::placeholder,
+.setup-card textarea::placeholder {
+  color: #a77b8b;
+}
+
+.primary-button {
+  width: 100%;
+
+  margin-top: 22px;
+
+  padding: 14px 20px;
+
+  border: 0;
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d63b70,
+      #b82052
+    );
+
+  color: #fff;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 24px rgba(184, 32, 82, 0.2);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin: 14px 0 0;
+
+  padding: 10px 12px;
+
+  border-radius: 12px;
+
+  background: rgba(180, 35, 70, 0.1);
+
+  color: #9c2044;
+
+  font-size: 0.88rem;
+}
+
+/* =========================================================
+   PROFILE CREATION
+   ========================================================= */
+
+.profile-preview {
+  display: flex;
+
+  justify-content: center;
+
+  margin: 8px 0 24px;
+}
+
+.profile-upload {
+  position: relative;
+
+  width: 110px;
+  height: 110px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  border: 2px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 15px 35px rgba(120, 30, 60, 0.15);
+}
+
+.profile-upload input {
+  display: none;
+}
+
+.profile-upload-empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #c93663;
+}
+
+.profile-upload-empty span {
+  font-size: 2rem;
+
+  line-height: 1;
+}
+
+.profile-upload-empty small {
+  color: #8b3a58;
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+}
+
+.profile-preview-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+/* =========================================================
+   LOGIN SCREEN
+   ========================================================= */
+
+.login-screen {
+  position: relative;
+  z-index: 2;
+
+  width: min(calc(100% - 32px), 760px);
+
+  min-height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px 0;
+}
+
+.login-header {
+  text-align: center;
+
+  margin-bottom: 28px;
+
+  color: #71394b;
+}
+
+.login-logo {
+  width: 72px;
+  height: 72px;
+
+  object-fit: contain;
+
+  margin-bottom: 12px;
+}
+
+.login-header h1 {
+  margin: 4px 0 8px;
+
+  color: #67152f;
+
+  font-size: clamp(2rem, 6vw, 3rem);
+
+  line-height: 1.05;
+}
+
+.login-header p:last-child {
+  margin: 0;
+
+  color: #82485e;
+}
+
+/* =========================================================
+   LOGIN PROFILE CARDS
+   ========================================================= */
+
+.profile-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  max-width: 520px;
+}
+
+.login-profile {
+  position: relative;
+
+  min-height: 220px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  padding: 24px;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  background: rgba(255, 255, 255, 0.46);
+
+  color: #67152f;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 18px 45px rgba(120, 30, 60, 0.1);
+
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-profile:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255, 255, 255, 0.56);
+
+  box-shadow:
+    0 20px 45px rgba(120, 30, 60, 0.18);
+}
+
+.login-profile.selected {
+  transform: translateY(-3px);
+
+  background: rgba(255, 225, 235, 0.62);
+
+  border-color: rgba(190, 45, 91, 0.42);
+
+  box-shadow:
+    0 20px 50px rgba(160, 35, 76, 0.2);
+}
+
+.login-avatar {
+  width: 105px;
+  height: 105px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.5);
+
+  border: 2px solid rgba(255, 255, 255, 0.85);
+
+  color: #c93663;
+
+  font-size: 2.2rem;
+
+  box-shadow:
+    0 12px 28px rgba(120, 30, 60, 0.12);
+}
+
+.login-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.login-profile strong {
+  max-width: 100%;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 1.05rem;
+}
+
+.selected-mark {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #c93663;
+
+  color: #fff;
+
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   PIN CARD
+   ========================================================= */
+
+.pin-card {
+  width: min(100%, 400px);
+
+  margin-top: 22px;
+
+  padding: 26px;
+
+  border-radius: 26px;
+
+  text-align: center;
+}
+
+.selected-profile-small {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 10px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  color: #c93663;
+
+  font-size: 1.4rem;
+}
+
+.selected-profile-small img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.pin-card h2 {
+  margin: 4px 0;
+
+  color: #67152f;
+}
+
+.pin-card > p {
+  margin: 6px 0 16px;
+
+  color: #82485e;
+}
+
+.pin-input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 15px;
+
+  border: 1px solid rgba(143, 45, 78, 0.18);
+
+  border-radius: 16px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.58);
+
+  color: #521329;
+
+  font-size: 1.4rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.55em;
+
+  text-align: center;
+}
+
+.pin-input:focus {
+  border-color: rgba(170, 42, 83, 0.55);
+
+  box-shadow:
+    0 0 0 4px rgba(214, 71, 111, 0.1);
+}
+
+/* =========================================================
+   MAIN APP
+   ========================================================= */
+
+.app-shell {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  min-height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  padding:
+    max(14px, env(safe-area-inset-top))
+    18px
+    calc(118px + env(safe-area-inset-bottom));
+}
+
+.app-topbar {
+  width: min(100%, 1100px);
+
+  height: 68px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 14px 0 18px;
+
+  border-radius: 22px;
+}
+
+.brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #64152f;
+
+  font-size: 1.15rem;
+
+  font-weight: 850;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+}
+
+.top-profile-button {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.58);
+
+  color: #c93663;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 18px rgba(120, 30, 60, 0.12);
+}
+
+.top-profile-button img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.app-content {
+  width: min(100%, 1100px);
+
+  flex: 1 1 auto;
+
+  padding: 28px 0 18px;
+}
+
+.home-page,
+.section-page {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.welcome-card {
+  padding: clamp(26px, 5vw, 48px);
+
+  border-radius: 30px;
+}
+
+.welcome-card h1 {
+  margin: 0 0 12px;
+
+  color: #64152f;
+
+  font-size: clamp(2rem, 6vw, 4rem);
+
+  line-height: 1.03;
+
+  letter-spacing: -0.035em;
+}
+
+.welcome-card > p:last-child {
+  max-width: 620px;
+
+  margin: 0;
+
+  color: #71394b;
+
+  line-height: 1.65;
+}
+
+.home-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.feature-card {
+  min-height: 190px;
+
+  padding: 25px;
+
+  border-radius: 25px;
+
+  border: 1px solid rgba(255, 255, 255, 0.78);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  color: #64152f;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  font: inherit;
+}
+
+.feature-icon {
+  margin-bottom: auto;
+
+  color: #c93663;
+
+  font-size: 2.35rem;
+}
+
+.feature-card strong {
+  font-size: 1.25rem;
+}
+
+.feature-card span:last-child {
+  color: #82485e;
+
+  line-height: 1.45;
+}
+
+.section-heading {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+.section-heading h1 {
+  margin: 2px 0 0;
+
+  color: #64152f;
+
+  font-size: clamp(2.15rem, 7vw, 3.35rem);
+
+  line-height: 1;
+}
+
+.small-button {
+  width: auto;
+
+  margin-top: 0;
+
+  white-space: nowrap;
+}
+
+.empty-state {
+  min-height: 300px;
+
+  padding: 32px 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  border-radius: 28px;
+}
+
+.empty-state > span {
+  color: #c93663;
+
+  font-size: 3rem;
+
+  margin-bottom: 12px;
+}
+
+.empty-state h2 {
+  margin: 0 0 8px;
+
+  color: #64152f;
+}
+
+.empty-state p {
+  margin: 0;
+
+  color: #82485e;
+}
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile-page {
+  width: min(100%, 600px);
+
+  margin: 0 auto;
+
+  padding: 38px;
+
+  border-radius: 32px;
+
+  text-align: center;
+}
+
+.profile-page-image {
+  width: 130px;
+  height: 130px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.5);
+
+  border: 2px solid rgba(255, 255, 255, 0.8);
+
+  color: #c93663;
+
+  font-size: 3rem;
+
+  box-shadow:
+    0 18px 40px rgba(120, 30, 60, 0.14);
+}
+
+.profile-page-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.profile-page h1 {
+  margin: 5px 0 12px;
+
+  color: #67152f;
+
+  font-size: 2.4rem;
+}
+
+.profile-description {
+  margin: 0 auto 26px;
+
+  max-width: 480px;
+
+  padding: 14px 16px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 225, 235, 0.62);
+
+  color: #713047 !important;
+
+  line-height: 1.7;
+
+  font-weight: 600;
+
+  overflow-wrap: anywhere;
+}
+
+.logout-button {
+  display: block;
+
+  width: 100%;
+
+  margin-top: 12px;
+
+  padding: 13px 18px;
+
+  border: 1px solid rgba(170, 42, 83, 0.2);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  color: #9c2044;
+
+  font: inherit;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.logout-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   DESKTOP NAVIGATION
+   ========================================================= */
+
+.desktop-navigation {
+  position: fixed;
+
+  left: 50%;
+
+  bottom:
+    max(18px, env(safe-area-inset-bottom));
+
+  transform: translateX(-50%);
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 7px;
+
+  border-radius: 22px;
+}
+
+.desktop-navigation button,
+.mobile-navigation button {
+  border: 0;
+
+  background: transparent;
+
+  color: #82485e;
+
+  font: inherit;
+
+  font-weight: 750;
+
+  cursor: pointer;
+}
+
+.desktop-navigation button {
+  min-width: 105px;
+
+  padding: 11px 14px;
+
+  border-radius: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+}
+
+.desktop-navigation button.active,
+.mobile-navigation button.active {
+  background: rgba(255, 218, 232, 0.78);
+
+  color: #a51f4c;
+}
+
+.mobile-navigation {
+  display: none;
+}
+
+/* =========================================================
+   ANDROID / MOBILE
+   ========================================================= */
+
 @media (max-width: 760px) {
 
+  .background-layer {
+    background-image: var(--mobile-background);
+  }
+
   .app-shell {
-    padding-bottom: calc(105px + env(safe-area-inset-bottom));
+    padding:
+      max(10px, env(safe-area-inset-top))
+      12px
+      calc(105px + env(safe-area-inset-bottom));
+  }
+
+  .app-topbar {
+    height: 62px;
+
+    padding: 0 11px 0 14px;
+
+    border-radius: 19px;
+  }
+
+  .brand {
+    font-size: 1.05rem;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .top-profile-button {
+    width: 42px;
+    height: 42px;
   }
 
   .app-content {
-    padding-bottom: 20px;
+    padding: 20px 0 16px;
   }
 
-  /*
-   * Sakuri has 5 navigation items:
-   * Home / Dreams / Memories / Profile / Settings
-   *
-   * Keep all five on ONE row.
-   */
+  .home-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    min-height: 155px;
+  }
+
+  .section-heading {
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 13px;
+  }
+
+  .small-button {
+    width: 100%;
+  }
+
+  .desktop-navigation {
+    display: none;
+  }
+
+  /* FIVE navigation items */
   .mobile-navigation {
     position: fixed;
+
     left: 10px;
     right: 10px;
-    bottom: max(8px, env(safe-area-inset-bottom));
+
+    bottom:
+      max(8px, env(safe-area-inset-bottom));
+
     z-index: 1000;
 
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    grid-template-columns:
+      repeat(5, minmax(0, 1fr));
 
     gap: 2px;
+
     padding: 5px;
 
-    border-radius: 22px;
+    border-radius: 21px;
 
     background: rgba(255, 250, 253, 0.72);
+
     border: 1px solid rgba(255, 255, 255, 0.82);
 
     box-shadow:
       0 12px 35px rgba(100, 30, 55, 0.16);
 
     -webkit-backdrop-filter: blur(22px);
-backdrop-filter: blur(22px);
+    backdrop-filter: blur(22px);
   }
 
   .mobile-navigation button {
     min-width: 0;
-    width: 100%;
+
     min-height: 58px;
+
+    width: 100%;
 
     padding: 5px 2px;
 
-    border: 0;
-    border-radius: 16px;
-
-    background: transparent;
-
-    color: #71394f;
+    border-radius: 15px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
-    gap: 4px;
+    gap: 3px;
 
-    font: inherit;
     font-size: 0.68rem;
-    font-weight: 750;
 
     line-height: 1.05;
+
     white-space: nowrap;
-
-    cursor: pointer;
-  }
-
-  .mobile-navigation button.active {
-    background: rgba(255, 205, 225, 0.88);
-    color: #a51f4c;
   }
 
   .mobile-navigation button span {
-    display: block;
-    font-size: 1.15rem;
+    font-size: 1.12rem;
+
     line-height: 1;
   }
 
-  /*
-   * Prevent long headings/buttons from overflowing
-   * narrow Android screens.
-   */
-  .app-content {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
+  .mobile-navigation button.active {
+    background: rgba(255, 210, 227, 0.88);
   }
 
-  .section-heading,
-  .memories-header,
-  .profile-header {
-    min-width: 0;
+  /* Login */
+  .login-screen {
+    width: min(calc(100% - 24px), 500px);
+
+    padding: 28px 0;
   }
 
-  .section-heading h1,
-  .memories-header h1,
-  .profile-header h1 {
-    overflow-wrap: anywhere;
+  .profile-grid {
+    gap: 12px;
   }
 
-  /*
-   * Buttons should never force horizontal scrolling.
-   */
-  button {
-    max-width: 100%;
+  .login-profile {
+    min-height: 185px;
+
+    padding: 18px;
+
+    border-radius: 22px;
+  }
+
+  .login-avatar {
+    width: 82px;
+    height: 82px;
+  }
+
+  .pin-card {
+    padding: 22px;
+
+    border-radius: 22px;
+  }
+
+  .setup-card {
+    padding: 28px 20px;
+
+    border-radius: 25px;
+  }
+
+  .setup-logo {
+    width: 68px;
+    height: 68px;
+  }
+
+  .profile-page {
+    padding: 28px 20px;
+
+    border-radius: 26px;
   }
 }
 
+/* =========================================================
+   VERY SMALL ANDROID PHONES
+   ========================================================= */
 
-/* Smaller phones */
 @media (max-width: 390px) {
 
-  .app-shell {
-    padding-left: 9px;
-    padding-right: 9px;
-  }
-
-  .mobile-navigation {
-    left: 7px;
-    right: 7px;
-  }
-
   .mobile-navigation button {
-    min-height: 56px;
     font-size: 0.61rem;
   }
 
   .mobile-navigation button span {
     font-size: 1rem;
+  }
+
+  .app-shell {
+    padding-left: 9px;
+
+    padding-right: 9px;
+  }
+
+  .mobile-navigation {
+    left: 7px;
+
+    right: 7px;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .login-profile {
+    min-height: 150px;
+
+    flex-direction: row;
+
+    justify-content: flex-start;
+  }
+
+  .login-avatar {
+    width: 70px;
+    height: 70px;
+
+    flex-shrink: 0;
   }
 }
