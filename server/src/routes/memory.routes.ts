@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 
 import { authenticate } from "../middleware/authenticate.js";
 
@@ -12,22 +13,57 @@ import {
 
 const router = Router();
 
-// All memory routes require login.
+const upload = multer({
+  storage: multer.memoryStorage(),
+
+  limits: {
+    files: 10,
+    fileSize: 5 * 1024 * 1024,
+  },
+
+  fileFilter: (
+    _req,
+    file,
+    callback,
+  ) => {
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+
+    if (
+      !allowedTypes.includes(
+        file.mimetype,
+      )
+    ) {
+      callback(
+        new Error(
+          "Only JPG, PNG and WebP images are allowed.",
+        ),
+      );
+
+      return;
+    }
+
+    callback(null, true);
+  },
+});
+
 router.use(authenticate);
 
 // --------------------------------------------------
 // CREATE MEMORY
-// POST /api/memories
 // --------------------------------------------------
 
 router.post(
   "/",
+  upload.array("images", 10),
   createMemory,
 );
 
 // --------------------------------------------------
 // GET ALL MEMORIES
-// GET /api/memories
 // --------------------------------------------------
 
 router.get(
@@ -37,7 +73,6 @@ router.get(
 
 // --------------------------------------------------
 // GET ONE MEMORY
-// GET /api/memories/:memoryId
 // --------------------------------------------------
 
 router.get(
@@ -47,17 +82,16 @@ router.get(
 
 // --------------------------------------------------
 // UPDATE MEMORY
-// PATCH /api/memories/:memoryId
 // --------------------------------------------------
 
 router.patch(
   "/:memoryId",
+  upload.array("images", 10),
   updateMemory,
 );
 
 // --------------------------------------------------
 // DELETE MEMORY
-// DELETE /api/memories/:memoryId
 // --------------------------------------------------
 
 router.delete(
