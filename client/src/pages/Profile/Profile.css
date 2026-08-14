@@ -1,318 +1,423 @@
+/* =========================================================
+   Sakuri Profile — Android-first
+   ========================================================= */
+
 .profile-page {
-  width: 100%;
-  max-width: 1050px;
+  width: min(100%, 760px);
   margin: 0 auto;
-  padding: 32px 24px 140px;
-  box-sizing: border-box;
+  padding: 4px 0 20px;
 }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .profile-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 24px;
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
 .profile-eyebrow {
-  margin: 0 0 8px;
-  font-size: 0.82rem;
+  margin: 0 0 7px;
+  color: #b52d59;
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: #b42d5d;
 }
 
 .profile-header h1 {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: #64152f;
+  font-size: clamp(2.1rem, 7vw, 3.3rem);
   line-height: 1;
-  color: #741936;
+  letter-spacing: -0.035em;
 }
 
 .profile-subtitle {
-  margin: 12px 0 0;
-  color: #87465e;
-  font-size: 1rem;
+  margin: 10px 0 0;
+  color: #753d52;
+  line-height: 1.5;
 }
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .profile-edit-button,
 .profile-save-button,
 .profile-cancel-button,
-.profile-image-button,
-.profile-empty button {
+.profile-image-button {
   border: 0;
-  border-radius: 999px;
-  padding: 12px 20px;
+  border-radius: 15px;
+  padding: 12px 17px;
   font: inherit;
   font-weight: 800;
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease;
 }
 
 .profile-edit-button,
 .profile-save-button {
-  color: white;
-  background: #c93668;
-  box-shadow: 0 10px 24px rgba(160, 36, 82, 0.2);
+  background: linear-gradient(135deg, #d63b70, #b82052);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(184, 32, 82, 0.2);
 }
 
 .profile-cancel-button {
-  color: #7b2948;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(171, 65, 103, 0.18);
-}
-
-.profile-edit-button:hover,
-.profile-save-button:hover,
-.profile-cancel-button:hover,
-.profile-image-button:hover,
-.profile-empty button:hover {
-  transform: translateY(-2px);
-}
-
-.profile-edit-button:disabled,
-.profile-save-button:disabled,
-.profile-cancel-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-  transform: none;
-}
-
-.profile-error {
-  margin-bottom: 20px;
-  padding: 14px 18px;
-  border-radius: 16px;
-  background: rgba(164, 41, 82, 0.12);
-  border: 1px solid rgba(164, 41, 82, 0.16);
-  color: #8a1f43;
-  font-weight: 700;
-}
-
-.profile-card {
-  display: grid;
-  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.2fr);
-  gap: 44px;
-  align-items: center;
-  padding: 36px;
-  border-radius: 30px;
-  background: rgba(255, 250, 253, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  box-shadow: 0 24px 70px rgba(112, 34, 67, 0.12);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-}
-
-.profile-image-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-
-.profile-image-wrapper {
-  width: 220px;
-  height: 220px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 7px solid rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 18px 45px rgba(133, 39, 75, 0.18),
-    inset 0 0 0 1px rgba(177, 64, 103, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.profile-image-empty {
-  font-size: 4rem;
-  color: #cf3568;
+  background: rgba(255, 225, 235, 0.78);
+  color: #8f2347;
 }
 
 .profile-image-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.78);
-  color: #8a294a;
-  border: 1px solid rgba(173, 53, 94, 0.18);
+  background: rgba(255, 221, 233, 0.86);
+  color: #982044;
+}
+
+.profile-edit-button:disabled,
+.profile-save-button:disabled,
+.profile-cancel-button:disabled,
+.profile-image-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.profile-error {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+
+  border-radius: 14px;
+
+  background: rgba(180, 35, 70, 0.1);
+  border: 1px solid rgba(180, 35, 70, 0.12);
+
+  color: #982044;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   PROFILE CARD
+   ========================================================= */
+
+.profile-card {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 0.72fr)
+    minmax(0, 1.28fr);
+
+  gap: 28px;
+
+  padding: 28px;
+
+  border-radius: 30px;
+
+  background: rgba(255, 250, 253, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+
+  box-shadow: 0 20px 50px rgba(120, 30, 60, 0.11);
+
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+}
+
+/* =========================================================
+   PROFILE IMAGE
+   ========================================================= */
+
+.profile-image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.profile-image-wrapper {
+  width: min(180px, 100%);
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  padding: 5px;
+
+  background: linear-gradient(145deg, #f6a9c4, #d63b70);
+
+  box-shadow: 0 16px 38px rgba(184, 32, 82, 0.18);
+}
+
+.profile-image,
+.profile-image-empty {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+}
+
+.profile-image {
+  object-fit: cover;
+  background: #f7e4eb;
+}
+
+.profile-image-empty {
+  background: rgba(255, 250, 253, 0.94);
+  color: #c93663;
+  font-size: 3.5rem;
 }
 
 .profile-image-button input {
   display: none;
 }
 
+/* =========================================================
+   PROFILE INFORMATION
+   ========================================================= */
+
 .profile-information {
   min-width: 0;
-}
 
-.profile-information label {
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  margin-bottom: 20px;
-  color: #76213f;
+  justify-content: center;
+}
+
+.profile-information > label {
+  display: block;
+  margin-bottom: 16px;
+  color: #67203a;
   font-weight: 800;
 }
 
 .profile-information input,
 .profile-information textarea {
+  display: block;
+
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgba(163, 54, 93, 0.18);
-  border-radius: 16px;
-  padding: 15px 17px;
-  background: rgba(255, 255, 255, 0.72);
-  color: #5f1833;
-  font: inherit;
+
+  margin-top: 7px;
+  padding: 13px 14px;
+
+  border: 1px solid rgba(143, 45, 78, 0.16);
+  border-radius: 15px;
+
   outline: none;
-  resize: vertical;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+
+  background: rgba(255, 255, 255, 0.86);
+  color: #511329;
+
+  font: inherit;
+  line-height: 1.45;
+
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .profile-information input:focus,
 .profile-information textarea:focus {
-  border-color: rgba(198, 47, 100, 0.55);
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 0 0 4px rgba(205, 53, 104, 0.1);
+  border-color: rgba(190, 45, 91, 0.45);
+
+  box-shadow:
+    0 0 0 4px rgba(214, 59, 112, 0.09);
 }
 
 .profile-information textarea {
-  min-height: 130px;
+  min-height: 125px;
+  resize: vertical;
 }
 
 .profile-label {
   display: block;
-  margin-bottom: 8px;
-  color: #9a4765;
-  font-size: 0.8rem;
+  margin-bottom: 6px;
+
+  color: #a34e6a;
+
+  font-size: 0.76rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .profile-information h2 {
-  margin: 0 0 28px;
-  color: #6d1836;
-  font-size: 2rem;
+  margin: 0 0 22px;
+
+  color: #64152f;
+
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  line-height: 1.1;
+
+  overflow-wrap: anywhere;
 }
 
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
 .profile-description {
+  max-width: 560px;
+
   margin: 0;
-  color: #75415a;
-  font-size: 1.05rem;
-  line-height: 1.7;
+  padding: 15px 16px;
+
+  border-radius: 17px;
+
+  background: rgba(255, 225, 235, 0.62);
+  border: 1px solid rgba(190, 45, 91, 0.1);
+
+  /*
+   * Important:
+   * The old description became almost white on the glass.
+   * This forces a readable dark pink/brown.
+   */
+  color: #713047 !important;
+
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.65;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+
+  text-align: left;
 }
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
 
 .profile-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 26px;
+  gap: 10px;
+  margin-top: 4px;
 }
+
+.profile-save-button,
+.profile-cancel-button {
+  min-height: 44px;
+}
+
+/* =========================================================
+   LOADING / EMPTY
+   ========================================================= */
 
 .profile-loading,
 .profile-empty {
-  min-height: 420px;
+  min-height: 300px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   text-align: center;
-  padding: 40px;
-  border-radius: 30px;
-  background: rgba(255, 250, 253, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  box-shadow: 0 24px 70px rgba(112, 34, 67, 0.12);
-  backdrop-filter: blur(22px);
+
+  padding: 30px;
+
+  border-radius: 28px;
+
+  background: rgba(255, 250, 253, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+
+  box-shadow: 0 18px 45px rgba(120, 30, 60, 0.09);
+
   -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
 }
 
 .profile-loading span,
-.profile-empty span {
-  font-size: 3rem;
-  color: #d1366b;
-}
-
-.profile-loading p,
-.profile-empty p {
-  color: #7e4860;
+.profile-empty > span {
+  color: #c93663;
+  font-size: 2.5rem;
 }
 
 .profile-empty h1 {
-  margin: 18px 0 8px;
-  color: #741936;
+  color: #64152f;
 }
 
-.profile-empty button {
-  color: white;
-  background: #c93668;
+.profile-empty p {
+  color: #71394b;
 }
 
-@media (max-width: 800px) {
+/* =========================================================
+   ANDROID / MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
   .profile-page {
-    padding: 22px 16px 130px;
+    padding-bottom: 10px;
   }
 
   .profile-header {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
+    margin-bottom: 15px;
+  }
+
+  .profile-header h1 {
+    font-size: clamp(2rem, 11vw, 2.8rem);
+  }
+
+  .profile-edit-button {
+    width: 100%;
+    min-height: 48px;
   }
 
   .profile-card {
     grid-template-columns: 1fr;
-    padding: 24px;
-    gap: 30px;
+    gap: 20px;
+
+    padding: 20px;
+
+    border-radius: 24px;
   }
 
   .profile-image-wrapper {
-    width: 180px;
-    height: 180px;
+    width: 142px;
   }
 
   .profile-information {
     width: 100%;
   }
-}
 
-@media (max-width: 480px) {
-  .profile-page {
-    padding: 16px 12px 120px;
-  }
-
-  .profile-card {
-    padding: 18px;
-    border-radius: 24px;
-  }
-
-  .profile-header h1 {
-    font-size: 2.3rem;
-  }
-
-  .profile-image-wrapper {
-    width: 150px;
-    height: 150px;
+  .profile-description {
+    max-width: 100%;
+    font-size: 0.96rem;
   }
 
   .profile-actions {
     flex-direction: column;
   }
 
-  .profile-actions button {
+  .profile-save-button,
+  .profile-cancel-button {
     width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  .profile-card {
+    padding: 17px;
+  }
+
+  .profile-image-wrapper {
+    width: 128px;
   }
 }
