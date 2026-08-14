@@ -12,35 +12,56 @@ import {
 
 const router = Router();
 
+// All memory routes require login.
 router.use(authenticate);
 
-// Create memory
+// --------------------------------------------------
+// CREATE MEMORY
+// POST /api/memories
+// --------------------------------------------------
+
 router.post(
-  "/:dreamId/memories",
+  "/",
   createMemory,
 );
 
-// Get all memories for a dream
+// --------------------------------------------------
+// GET ALL MEMORIES
+// GET /api/memories
+// --------------------------------------------------
+
 router.get(
-  "/:dreamId/memories",
+  "/",
   getMemories,
 );
 
-// Get one memory
+// --------------------------------------------------
+// GET ONE MEMORY
+// GET /api/memories/:memoryId
+// --------------------------------------------------
+
 router.get(
-  "/:dreamId/memories/:memoryId",
+  "/:memoryId",
   getMemory,
 );
 
-// Edit memory
+// --------------------------------------------------
+// UPDATE MEMORY
+// PATCH /api/memories/:memoryId
+// --------------------------------------------------
+
 router.patch(
-  "/:dreamId/memories/:memoryId",
+  "/:memoryId",
   updateMemory,
 );
 
-// Delete memory
+// --------------------------------------------------
+// DELETE MEMORY
+// DELETE /api/memories/:memoryId
+// --------------------------------------------------
+
 router.delete(
-  "/:dreamId/memories/:memoryId",
+  "/:memoryId",
   deleteMemory,
 );
 

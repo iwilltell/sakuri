@@ -102,6 +102,9 @@ export async function getMemories(
     }
 
     const memories = await prisma.memory.findMany({
+      where: {
+        accountId: req.account.id,
+      },
       orderBy: {
         createdAt: "desc",
       },
@@ -136,9 +139,10 @@ export async function getMemory(
       req.params.memoryId,
     );
 
-    const memory = await prisma.memory.findUnique({
+    const memory = await prisma.memory.findFirst({
       where: {
         id: memoryId,
+        accountId: req.account.id,
       },
     });
 
@@ -178,9 +182,10 @@ export async function updateMemory(
       req.params.memoryId,
     );
 
-    const existing = await prisma.memory.findUnique({
+    const existing = await prisma.memory.findFirst({
       where: {
         id: memoryId,
+        accountId: req.account.id,
       },
     });
 
@@ -240,9 +245,10 @@ export async function deleteMemory(
       req.params.memoryId,
     );
 
-    const existing = await prisma.memory.findUnique({
+    const existing = await prisma.memory.findFirst({
       where: {
         id: memoryId,
+        accountId: req.account.id,
       },
     });
 
