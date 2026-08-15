@@ -4,8 +4,15 @@ import {
 
 import "./Settings.css";
 
+import {
+  isMusicEnabled,
+  isTouchSoundEnabled,
+  setMusicEnabled,
+  setTouchSoundEnabled,
+} from "../../audio/SakuriAudio";
+
 const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:4000"
+  import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 type SettingsProps = {
   email: string;
@@ -42,8 +49,31 @@ function Settings({
   const [message, setMessage] =
     useState("");
 
-  const [deleting, setDeleting] =
-    useState(false);
+  const [musicEnabled, setMusicEnabledState] =
+    useState(isMusicEnabled());
+
+  const [touchSoundsEnabled, setTouchSoundsEnabledState] =
+    useState(isTouchSoundEnabled());
+
+  // --------------------------------------------------
+  // AUDIO SETTINGS
+  // --------------------------------------------------
+
+  function toggleMusic(): void {
+    const next =
+      !musicEnabled;
+
+    setMusicEnabledState(next);
+    setMusicEnabled(next);
+  }
+
+  function toggleTouchSounds(): void {
+    const next =
+      !touchSoundsEnabled;
+
+    setTouchSoundsEnabledState(next);
+    setTouchSoundEnabled(next);
+  }
 
   // --------------------------------------------------
   // SEND OTP
@@ -238,58 +268,6 @@ function Settings({
     setConfirmPin("");
     setError("");
     setMessage("");
-  }
-
-  // --------------------------------------------------
-  // DELETE ACCOUNT
-  // --------------------------------------------------
-
-  async function deleteAccount() {
-    const confirmed = window.confirm(
-      "Delete your Sakuri account permanently?\n\nThis will delete your profile, dreams, memories, images, sessions and PIN recovery data. This cannot be undone.",
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    try {
-      setDeleting(true);
-      setError("");
-      setMessage("");
-
-      const response =
-        await fetch(
-          `${API_URL}/api/auth/account`,
-          {
-            method: "DELETE",
-            credentials: "include",
-          },
-        );
-
-      const data =
-        await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.message ??
-            "Unable to delete your account.",
-        );
-      }
-
-      // The backend has already cleared the session.
-      // Reload so App.tsx re-checks the number of accounts
-      // and returns to the correct setup/profile screen.
-      window.location.reload();
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Unable to delete your account.",
-      );
-    } finally {
-      setDeleting(false);
-    }
   }
 
   // --------------------------------------------------
@@ -509,6 +487,96 @@ function Settings({
           </div>
         </div>
 
+        {/* AUDIO / EXPERIENCE */}
+
+        <div className="settings-card">
+          <div className="settings-card-icon">
+            🎵
+          </div>
+
+          <div className="settings-card-content">
+            <h2>
+              Sakuri Sounds
+            </h2>
+
+            <p>
+              Add a little music and
+              gentle sounds while using
+              Sakuri.
+            </p>
+
+            <div className="settings-audio-row">
+              <div>
+                <strong>
+                  🎵 Background Music
+                </strong>
+
+                <span>
+                  Soft music while using
+                  Sakuri
+                </span>
+              </div>
+
+              <button
+                type="button"
+                className={`settings-toggle ${
+                  musicEnabled
+                    ? "enabled"
+                    : ""
+                }`}
+                aria-label={
+                  musicEnabled
+                    ? "Turn background music off"
+                    : "Turn background music on"
+                }
+                aria-pressed={
+                  musicEnabled
+                }
+                onClick={
+                  toggleMusic
+                }
+              >
+                <span />
+              </button>
+            </div>
+
+            <div className="settings-audio-row">
+              <div>
+                <strong>
+                  🔊 Touch Sounds
+                </strong>
+
+                <span>
+                  Gentle sounds when
+                  interacting
+                </span>
+              </div>
+
+              <button
+                type="button"
+                className={`settings-toggle ${
+                  touchSoundsEnabled
+                    ? "enabled"
+                    : ""
+                }`}
+                aria-label={
+                  touchSoundsEnabled
+                    ? "Turn touch sounds off"
+                    : "Turn touch sounds on"
+                }
+                aria-pressed={
+                  touchSoundsEnabled
+                }
+                onClick={
+                  toggleTouchSounds
+                }
+              >
+                <span />
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* ACCOUNT */}
 
         <div className="settings-card">
@@ -530,40 +598,6 @@ function Settings({
             <div className="settings-email">
               {email}
             </div>
-          </div>
-        </div>
-
-        {/* DANGER ZONE */}
-
-        <div className="settings-card settings-logout-card">
-          <div className="settings-card-icon">
-            ⚠️
-          </div>
-
-          <div className="settings-card-content">
-            <h2>
-              Danger Zone
-            </h2>
-
-            <p>
-              Permanently delete your Sakuri account
-              and everything belonging to it.
-            </p>
-
-            <button
-              type="button"
-              className="settings-logout-button"
-              onClick={() =>
-                void deleteAccount()
-              }
-              disabled={
-                loading || deleting
-              }
-            >
-              {deleting
-                ? "Deleting..."
-                : "Delete Account"}
-            </button>
           </div>
         </div>
 
